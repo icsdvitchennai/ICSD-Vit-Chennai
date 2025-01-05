@@ -504,7 +504,7 @@ html {
 
 .services__card {
     margin: 1rem;
-    height: auto;
+    height: 525pc;
     width: 400px;
     border-radius: 7px;
     background-image: url('pic3.jpeg');
