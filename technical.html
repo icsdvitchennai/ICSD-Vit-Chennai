@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Recruitment</title>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+    import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBFCw8NbteReP-NgjjTyinenXsEqOfJEJw",
+      authDomain: "icsd-5afdd.firebaseapp.com",
+      projectId: "icsd-5afdd",
+      storageBucket: "icsd-5afdd.firebasestorage.app",
+      messagingSenderId: "865187121871",
+      appId: "1:865187121871:web:6fc6da2ebbae2ed5f2c5ba",
+      measurementId: "G-S3CH9NP23F"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
+    let isSubmitting = false;
+    document.getElementById('recruitmentForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      if (isSubmitting) {
+        return;
+      }
+
+      const submitButton = document.querySelector('.submit-btn');
+
+      try {
+        isSubmitting = true;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+        submitButton.style.backgroundColor = '#cccccc';
+
+        // Collect answers
+        const answers = [];
+        for (let i = 1; i <= 9; i++) {
+          answers.push(document.getElementById(`q${i}`).value);
+        }
+
+        // Collect phone number
+        const phoneNumber = document.getElementById('q4').value;
+
+        // Use the phone number as the document ID and store the data in Firestore
+        await setDoc(doc(db, "recruitmentResponses", phoneNumber), {
+          answers: answers,
+          phoneNumber: phoneNumber,
+          timestamp: serverTimestamp(),
+        });
+
+        // Show WhatsApp modal
+        document.getElementById('whatsappModal').style.display = 'flex';
+        document.getElementById('formContainer').style.display = 'none';
+
+      } catch (error) {
+        console.error('Error submitting data: ', error);
+        alert('An error occurred while submitting your responses. Please try again.');
+      } finally {
+        isSubmitting = false;
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit';
+        submitButton.style.backgroundColor = '#40e5f8';
+      }
+    });
+  </script>
+
+  <!-- CSS for styling -->
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .form-container {
+      background-color: #222;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      max-width: 800px;
+      margin: 0 auto;
+      height: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #40e5f8;
+    }
+
+    /* WhatsApp Modal Styles */
+    .whatsapp-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: #222;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #128C7E;
+    }
+
+    .modal-content h2 {
+      color: #40e5f8;
+      margin-bottom: 20px;
+    }
+
+    .modal-content p {
+      margin-bottom: 30px;
+      color: #fafafa;
+      line-height: 1.6;
+    }
+
+    /* Rest of your existing styles... */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .question-label {
+      font-weight: bold;
+      color: #fafafa;
+    }
+
+    .question-box {
+      background-color: #333;
+      color: white;
+      border: 1px solid #444;
+      border-radius: 5px;
+      padding: 15px;
+      width: 100%;
+      min-height: 80px;
+      max-height: 300px;
+      resize: vertical;
+      box-sizing: border-box;
+      font-size: 1.1em;
+      line-height: 1.5;
+    }
+
+    .question-box:focus {
+      outline: 2px solid #f9fafa;
+      border-color: transparent;
+    }
+
+    .submit-btn {
+      background-color: #40e5f8;
+      color: black;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background-color: #2cd6e9;
+    }
+
+    .submit-btn:active {
+      transform: translateY(1px);
+    }
+
+    .submit-btn:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="formContainer" class="form-container">
+    <!-- Your existing form content -->
+    <h1>Technical Recruitment Form</h1>
+    <form id="recruitmentForm">
+      <!-- Your existing form fields -->
+      <div class="form-group">
+        <label class="question-label" for="q1">1. Describe your experience with JavaScript:</label>
+        <textarea class="question-box" id="q1" rows="4" placeholder="Your answer..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="question-label" for="q2">2. How do you optimize web page performance?</label>
+        <textarea class="question-box" id="q2" rows="4" placeholder="Your answer..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="question-label" for="q3">3. Explain your understanding of asynchronous programming in JavaScript:</label>
+        <textarea class="question-box" id="q3" rows="4" placeholder="Your answer..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="question-label" for="q4">4. Enter your phone number:</label>
+        <input class="question-box" type="tel" id="q4" placeholder="Your phone number..." required pattern="[0-9]{10}">
+      </div>
+      
+      <div class="form-group">
+        <label class="question-label" for="q5">5. What is your experience with front-end frameworks like React or Vue?</label>
+        <textarea class="question-box" id="q5" rows="4" placeholder="Your answer..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="question-label" for="q6">6. How would you debug a slow-running web application?</label>
+        <textarea class="question-box" id="q6" rows="4" placeholder="Your answer..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="question-label" for="q7">7. What experience do you have with REST APIs?</label>
+        <textarea class="question-box" id="q7" rows="4" placeholder="Your answer..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="question-label" for="q8">8. How do you ensure the security of your web applications?</label>
+        <textarea class="question-box" id="q8" rows="4" placeholder="Your answer..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="question-label" for="q9">9. Explain the concept of responsive design:</label>
+        <textarea class="question-box" id="q9" rows="4" placeholder="Your answer..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="question-label" for="q10">10. How do you handle collaboration with a development team?</label>
+        <textarea class="question-box" id="q10" rows="4" placeholder="Your answer..." required></textarea>
+      </div>
+
+      <button class="submit-btn" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- WhatsApp Modal -->
+  <div id="whatsappModal" class="whatsapp-modal">
+    <div class="modal-content">
+      <h2>Thank You for Submitting!</h2>
+      <p>Your responses have been recorded successfully. Please join our WhatsApp group for further updates and communication.</p>
+      <a href="https://chat.whatsapp.com/YOUR_GROUP_LINK" class="whatsapp-btn" target="_blank">
+        Join WhatsApp Group
+      </a>
+    </div>
+  </div>
+</body>
+</html>
