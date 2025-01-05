@@ -480,7 +480,7 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 160vh;
+    height: auto;
 }
 
 .services h1 {
