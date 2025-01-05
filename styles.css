@@ -504,17 +504,17 @@ html {
 
 .services__card {
     margin: 1rem;
-    height: 525pc;
+    height: 525px;
     width: 400px;
     border-radius: 7px;
-    background-image: url('pic3.jpeg');
+    background-image: url('/images/pic3.jpeg');
     background-size: cover;
     position: relative;
     color: #fff;
 }
 
 .services__card:nth-child(2) {
-    background-image: url('/picd.jpg');
+    background-image: url('picd.jpg');
 }
 
 .services__card:nth-child(3) {
