@@ -610,30 +610,30 @@ html {
     height: 525px;
     width: 400px;
     border-radius: 7px;
-    background-image: url('/images/pic3.jpeg');
+    background-image: url('pic3.jpeg');
     background-size: cover;
     position: relative;
     color: #fff;
 }
 
 .services__card:nth-child(2) {
-    background-image: url('/images/picd.jpg');
+    background-image: url('picd.jpg');
 }
 
 .services__card:nth-child(3) {
-    background-image: url('/images/picc.jpg');
+    background-image: url('picc.jpg');
 }
 
 .services__card:nth-child(4) {
-    background-image: url('/images/picsv.jpg'); /* Apply the desired image here */
+    background-image: url('picsv.jpg'); /* Apply the desired image here */
 }
 
 .services__card:nth-child(5) {
-    background-image: url('/images/picp.jpg');
+    background-image: url('picp.jpg');
 }
 
 .services__card:nth-child(6) {
-    background-image: url('/images/pic.jpg');
+    background-image: url('pic.jpg');
 }
 
 .services h2 {
