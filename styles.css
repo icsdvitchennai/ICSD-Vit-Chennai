@@ -641,7 +641,7 @@ html {
     top: 350px;  
     left: 30px;
     color: #000000;
-    background: linear-gradient(45deg, #2c3e50, #34495e, #16a085, #8e44ad); /* Darker, more moody colors */
+    background: linear-gradient(45deg, #ffffff, #f7f7f7, #f0f0f0, #e0e0e0); /* Very light, bright shades */
     background-size: 400% 400%;
     -webkit-background-clip: text;
     color: transparent; /* Make text transparent to display the gradient */
@@ -660,6 +660,8 @@ html {
         background-position: 0% 50%;
     }
 }
+
+
 
 
 
