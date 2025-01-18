@@ -6,6 +6,8 @@
 }
 
 html {
+    height: auto;
+    margin: 0%;
    
     scroll-behavior: smooth;
 }
@@ -218,7 +220,7 @@ html {
     align-items: center;
     justify-self: center;
     margin: 0 auto;
-    height: 90vh;
+    height: 75vh;
     background-color: #131312;
     z-index: 1;
     width: 100%;
@@ -229,8 +231,9 @@ html {
 
 .main__content h1 {
     font-size: 4rem;
+    
     background-color: #FFDB58; /* Bright Yellow */
-    background-image: linear-gradient(to top, #FF1493, #FFDB58); /* Hot Pink to Yellow */
+    background: linear-gradient( to left, #e2c107, #f0e68c, #1cbdc6, #87cefa);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -242,7 +245,7 @@ html {
     .main__content h2 {
         font-size: 2rem;
         background-color: #9B59B6; /* Purple */
-        background-image: linear-gradient(to top, #8E44AD, #3498DB); /* Purple to Blue */
+        background-image: linear-gradient(to bottom, #4c45cf, #a15ccf); /* Purple to Blue */
         background-size: 100%;
         -webkit-background-clip: text;
         -moz-background-clip: text;
@@ -258,7 +261,7 @@ html {
 }
 
 .main__content p {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     font-size: 2rem;
     font-weight: 700;
     color: #ffffff;
@@ -272,11 +275,12 @@ html {
 
  .main__btn {
     font-size: 1.5rem;
-    background: #ffffff;
+    background-color: #58d5ff; /* Bright Yellow */
+    background: linear-gradient(to top, #e2c107, #d6cc7f, #1cbdc6, #87cefa);
     padding: 14px 32px;
     border: none;
     border-radius: 4px;
-    color: #0a0a0a;
+    color: #ffecec00;
     margin-top: 2rem;
     cursor: pointer;
     transition: all 0.35s ease;
@@ -312,7 +316,7 @@ html {
 }
 
 .main__btn a {
-    color: #040404;
+    color: #000000;
     text-decoration: none;
     position: relative;
     z-index: 2;
@@ -377,12 +381,15 @@ html {
     }
     
     .main__content h2 {
+        margin-top: 0.5rem;
         font-size: 1.4rem;
+        align-items: center;
     }
 
     .main__content p {
-        margin-top: 2rem;
+        margin-top: 1.3rem;
         font-size: 1.4rem;
+        align-items: baseline;
     }
 
     .main__btn {
@@ -544,7 +551,7 @@ html {
 
 .services h1 {
     font-size: 40px;
-    background-image: linear-gradient(to right, #00bcd4 0%, #ff5722 100%);
+    background-image: linear-gradient(to right, #00bcd4 0%, #e76c47 100%);
     background-size: 100%;
     margin-bottom: 5rem;
     -webkit-background-clip: text;
@@ -566,56 +573,43 @@ html {
     height: 525px;
     width: 400px;
     border-radius: 7px;
-    background-image: url('/images/pic3.jpeg');
+    background-image: url('pic3.jpeg');
     background-size: cover;
     position: relative;
     color: #fff;
 }
 
 .services__card:nth-child(2) {
-    background-image: url('/images/picd.jpg');
+    background-image: url('picd.jpg');
 }
 
 .services__card:nth-child(3) {
-    background-image: url('/images/picc.jpg');
+    background-image: url('picc.jpg');
 }
 
 .services__card:nth-child(4) {
-    background-image: url('/images/picsv.jpg'); /* Apply the desired image here */
+    background-image: url('picsv.jpg'); /* Apply the desired image here */
 }
 
 .services__card:nth-child(5) {
-    background-image: url('/images/picp.jpg');
+    background-image: url('picp.jpg');
 }
 
 .services__card:nth-child(6) {
-    background-image: url('/images/pic.jpg');
+    background-image: url('pic.jpg');
 }
 
 .services h2 {
     position: absolute;
-    top: 350px;  
+    top: 340px;
     left: 30px;
-    color: #000000;
-    background: linear-gradient(45deg, #ffffff, #f7f7f7, #f0f0f0, #e0e0e0); /* Very light, bright shades */
-    background-size: 400% 400%;
+    background-color: #ffff;
     -webkit-background-clip: text;
-    color: transparent; /* Make text transparent to display the gradient */
-    animation: floatingText 3s ease infinite; /* Smooth, floating animation */
+    -webkit-text-fill-color: transparent; /* Make text transparent to display the gradient */
+    animation: floatingText 3s ease infinite;
 }
 
 /* Define the smooth, floating color change animation */
-@keyframes floatingText {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
 
 
@@ -623,11 +617,8 @@ html {
 
 
 
-.services__card p{
-    position: absolute;
-    top: 405px;
-    left: 30px;
-}
+
+
 
 .services__card button{
     color: #fff;
